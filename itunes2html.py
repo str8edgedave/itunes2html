@@ -1,6 +1,12 @@
 #!/usr/bin/env python3
 #-*- coding:utf-8 -*-
 
+try:
+    import xml.etree.cElementTree as ET
+except:
+    import xml.etree.ElementTree as ET
+
+
 class html(object):
     def output(self):
         text="""<!doctype html>
@@ -34,6 +40,6 @@ class html(object):
         return text 
 
 if __name__=="__main__":
-    print("processing")
-    htmllist=html()
-    print(htmllist.output())
+    tree = ET.parse("itunes.xml")
+    a = map(lambda x: x.text, tree.findall('dict/dict/dict')[1].findall('string'))
+    print(a)
